@@ -3,16 +3,21 @@ import { createStackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
 
 import EcranInscription from './screens/EcranInscription';
+import EcranDeDeclaration from './screens/EcranDeclaration';
 import EcranConnexion from './screens/EcranConnexion';
 import HomeScreen from './screens/HomeScreen';
 import apiKeys from './keys/apiKeys';
-
+import EcranDureeRelation from './screens/EcranDureeRelation';
 
 const MainNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     connexion: EcranConnexion,
     inscription: EcranInscription,
+    declaration: EcranDeDeclaration,
+    dureeRelation: EcranDureeRelation
+    
+    
   },
   {
     initialRouteName: 'Home',
@@ -24,15 +29,26 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       isLoadingComplete: false,
+      isAuthentificationReady: false,
+      isAuthenticated: false
     };
     //initialisation de firebase
     if (!firebase.apps.length) { firebase.initializeApp(apiKeys.FirebaseConfig); }
+    firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
+  }
+
+  onAuthStateChanged = (user) => {
+    this.setState({ isAuthentificationReady: true });
+    this.setState(({ isAuthenticated: !!user }));
   }
   render() {
     return (
-    <MainNavigator>
-        <EcranConnexion />
-    </MainNavigator>
+        
+      <MainNavigator>
+        {(this.state.isAuthenticated) ? <EcranDeDeclaration /> : <EcranConnexion />}  
+        
+      </MainNavigator>
+    
           );
   }
 }

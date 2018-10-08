@@ -1,14 +1,31 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, Alert, KeyboardAvoidingView } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
+import * as firebase from 'firebase';
 
 class EcranConnexion extends React.Component {
     static navigationOptions = {
      
     }
+    constructor(props) {
+        super(props);
+        this.state = { 
+            email: '',
+            password: '',
+        };
+    }
+    onPressconnexion = () => {
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() => {
+            Alert.alert('vous etes connecté');
+            this.props.navigation.navigate('dureeRelation');
+        }, (error) => {
+            Alert.alert(error.message);
+        });
+    }
   render() { 
       return (
-      <View style={connexionStyle.connectContainer}>
+      <KeyboardAvoidingView behavior='position' style={connexionStyle.connectContainer}>
         <View style={{ justifyContent: 'center', alignItems: 'center', top: 20 }}>
             <Image 
                 style={{ height: 70, width: 80 }} 
@@ -23,15 +40,20 @@ class EcranConnexion extends React.Component {
                     placeholder='exemple@gmail.com'
                     keyboardType='email-address'
                     selectionColor='#ce5e4b'
+                    value={this.state.email}
+                    onChangeText={(email) => { this.setState({ email }); }}
                    
                 />
             <FormLabel>Mot de passe</FormLabel>
                 <FormInput 
                     style={connexionStyle.inputBox}
                     placeholder='mot de passe'
-                    secureTextEntry true 
+                    secureTextEntry true
+                    value={this.state.password}
+                    onChangeText={(password) => { this.setState({ password }); }}
                 />
             <Button 
+            onPress={this.onPressconnexion}
                 title='connexion'
                 buttonStyle={{
                     backgroundColor: '#ce5e4b',
@@ -45,7 +67,7 @@ class EcranConnexion extends React.Component {
                   }}
             />
         </View>
-        </View>
+        </KeyboardAvoidingView>
     );
   }
 }

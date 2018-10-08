@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+//import { View, Text } from 'react-native';
+import { createDrawerNavigator } from 'react-navigation';
+import EcranMenu from './EcranMenu';
+import ecranPartageLapp from './EcranPartagerlApp';
 
+const AppDrawernavigator = createDrawerNavigator({
+    menuEcran: EcranMenu,
+    'mon profil': ecranPartageLapp,
+
+  
+  });
 class EcranDureeRelation extends Component {
     render() {
         return (
-            <View>
-            <Text>ecran de DureeRelation </Text>
-            <Text>ecran de DureeRelation </Text>
-            <Text>ecran de DureeRelation </Text>
-            <Text>ecran de DureeRelation </Text>
-            </View>
+            <AppDrawernavigator />
+                
         );
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert, KeyboardAvoidingView } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
-
+import * as firebase from 'firebase';
 
 class EcranInscription extends Component {
     static navigationOptions = {
@@ -9,25 +9,65 @@ class EcranInscription extends Component {
         
 
     }
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            nom: '',
+            prenom: '',
+            confirmPassword: ''
+        };
+    }
    
+    onPressInscription = () => {
+        //avant on verifie si les mots de passes sont identiques
+        if (this.state.password !== this.state.confirmPassword) {
+            Alert.alert('les mots de passes ne correspondent pas...');
+            return;
+        }
+        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() => {
+            Alert.alert('inscription reussie');
+            this.props.navigation.navigate('declaration');
+        }, (error) => {
+            Alert.alert(error.message);
+        });
+    }
     render() {
         return (
-            <View style={styleInscription.container}>
+            <KeyboardAvoidingView behavior='position' style={styleInscription.container}>
                 <View style={styleInscription.titre}>
                     <Text style={{ fontSize: 20 }}>inscription</Text>
                 </View>
                 <FormLabel>nom</FormLabel>
-                <FormInput />
+                <FormInput
+                  value={this.state.nom}
+                  onChangeText={(nom) => { this.setState({ nom }); }}
+                />
                 <FormLabel>prenom</FormLabel>
-                <FormInput />
-                <FormLabel>mail</FormLabel>
-                <FormInput />
+                <FormInput
+                    value={this.state.prenom}
+                    onChangeText={(prenom) => { this.setState({ prenom }); }}
+                />
+                <FormLabel>email</FormLabel>
+                <FormInput 
+                    keyboardType='email-address' 
+                    value={this.state.email}
+                    onChangeText={(email) => { this.setState({ email }); }}
+                />
                 <FormLabel>mot de passe</FormLabel>
-                <FormInput />
+                <FormInput 
+                  value={this.state.password}
+                  onChangeText={(password) => { this.setState({ password }); }}
+                />
                 <FormLabel> confirmer mot de passe</FormLabel>
-                <FormInput />
+                <FormInput 
+                  value={this.state.confirmPassword}
+                  onChangeText={(confirmPassword) => { this.setState({ confirmPassword }); }}
+                />
                 <Button 
-                    onPress={this.handleSubmit}
+                    onPress={this.onPressInscription}
                     title='valider'
                     buttonStyle={{
                         backgroundColor: '#ce5e4b',
@@ -40,7 +80,7 @@ class EcranInscription extends Component {
                         
                       }}
                 />
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }
