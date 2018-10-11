@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { Header, Icon } from 'native-base';
 
 
-class Ecranrupture extends Component {
+class EcranMotDamour extends Component {
     static navigationOptions = {
         drawerIcon: (
             <Image 
-            source={require('../components/img/logo/Rupture.png')}
+            source={require('../components/img/logo/mot-damour.png')}
             style={{ height: 24, width: 24 }} 
 
             />
@@ -20,18 +20,19 @@ class Ecranrupture extends Component {
             style={{
                 backgroundColor: 'white',
                 justifyContent: 'flex-start',
-                alignItems: 'flex-end' 
+                alignItems: 'flex-end',
+                 
           }}>
                
                     <Icon 
                         name='menu'
                         onPress={() => this.props.navigation.openDrawer()}
-                        Color='#ce5e4b'
+                        
                         
                     />
                 
             </Header>
-            <Text>ecran de rupture relation </Text>
+            <Text>ecran de mot d'amour </Text>
         </View>
         );
     }
@@ -44,4 +45,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Ecranrupture;
+export default EcranMotDamour;

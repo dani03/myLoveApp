@@ -38,6 +38,7 @@ export default class App extends React.Component {
   }
 
   onAuthStateChanged = (user) => {
+    firebase.auth().languageCode = 'fr';
     this.setState({ isAuthentificationReady: true });
     this.setState(({ isAuthenticated: !!user }));
   }

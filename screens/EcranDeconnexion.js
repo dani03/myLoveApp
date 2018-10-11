@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { Header, Icon } from 'native-base';
 
 
-class Ecranrupture extends Component {
+class EcranDeconnexion extends Component {
     static navigationOptions = {
         drawerIcon: (
             <Image 
-            source={require('../components/img/logo/Rupture.png')}
+            source={require('../components/img/logo/DeÌconnexion.png')}
             style={{ height: 24, width: 24 }} 
 
             />
@@ -31,7 +31,7 @@ class Ecranrupture extends Component {
                     />
                 
             </Header>
-            <Text>ecran de rupture relation </Text>
+            <Text>ecran deconnexion </Text>
         </View>
         );
     }
@@ -43,5 +43,4 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF'
     }
 });
-
-export default Ecranrupture;
+export default EcranDeconnexion;

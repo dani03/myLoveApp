@@ -19,7 +19,7 @@ class EcranInscription extends Component {
             confirmPassword: ''
         };
     }
-   
+    
     onPressInscription = () => {
         //avant on verifie si les mots de passes sont identiques
         if (this.state.password !== this.state.confirmPassword) {
@@ -27,13 +27,15 @@ class EcranInscription extends Component {
             return;
         }
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then(() => {
+        .then(() => {          
             Alert.alert('inscription reussie');
             this.props.navigation.navigate('declaration');
         }, (error) => {
+            firebase.auth().languageCode = 'fr';
             Alert.alert(error.message);
         });
     }
+   
     render() {
         return (
             <KeyboardAvoidingView behavior='position' style={styleInscription.container}>

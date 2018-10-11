@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-class Profil extends Component {
+class EcranProfil extends Component {
     render() {
         return (
             <View>
@@ -14,4 +14,4 @@ class Profil extends Component {
     }
 }
 
-export default Profil;
+export default EcranProfil;

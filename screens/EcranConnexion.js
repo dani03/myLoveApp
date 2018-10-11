@@ -3,6 +3,7 @@ import { View, StyleSheet, Image, Text, Alert, KeyboardAvoidingView } from 'reac
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import * as firebase from 'firebase';
 
+
 class EcranConnexion extends React.Component {
     static navigationOptions = {
      
@@ -14,15 +15,17 @@ class EcranConnexion extends React.Component {
             password: '',
         };
     }
+   
     onPressconnexion = () => {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(() => {
+        .then(() => {         
             Alert.alert('vous etes connecté');
             this.props.navigation.navigate('dureeRelation');
         }, (error) => {
-            Alert.alert(error.message);
+                Alert.alert(error.message);
         });
     }
+    
   render() { 
       return (
       <KeyboardAvoidingView behavior='position' style={connexionStyle.connectContainer}>
@@ -42,7 +45,7 @@ class EcranConnexion extends React.Component {
                     selectionColor='#ce5e4b'
                     value={this.state.email}
                     onChangeText={(email) => { this.setState({ email }); }}
-                   
+                    underlineColorAndroid='#ce5e4b'
                 />
             <FormLabel>Mot de passe</FormLabel>
                 <FormInput 
@@ -51,6 +54,7 @@ class EcranConnexion extends React.Component {
                     secureTextEntry true
                     value={this.state.password}
                     onChangeText={(password) => { this.setState({ password }); }}
+                    underlineColorAndroid='#ce5e4b'
                 />
             <Button 
             onPress={this.onPressconnexion}

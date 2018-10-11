@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { Header, Icon } from 'native-base';
 
 
-class Ecranrupture extends Component {
+class Apropos extends Component {
     static navigationOptions = {
         drawerIcon: (
             <Image 
-            source={require('../components/img/logo/Rupture.png')}
+            source={require('../components/img/logo/A-Propos.png')}
             style={{ height: 24, width: 24 }} 
 
             />
@@ -31,7 +31,7 @@ class Ecranrupture extends Component {
                     />
                 
             </Header>
-            <Text>ecran de rupture relation </Text>
+            <Text>ecran à propos </Text>
         </View>
         );
     }
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Ecranrupture;
+export default Apropos;
