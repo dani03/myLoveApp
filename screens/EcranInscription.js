@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Alert, KeyboardAvoidingView } from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { View, Text, StyleSheet, Alert,
+     KeyboardAvoidingView, TextInput, ScrollView } from 'react-native';
+import { FormLabel, Button } from 'react-native-elements';
 import * as firebase from 'firebase';
 
 class EcranInscription extends Component {
@@ -29,7 +30,7 @@ class EcranInscription extends Component {
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => {          
             Alert.alert('inscription reussie');
-            this.props.navigation.navigate('declaration');
+            this.props.navigation.push('declaration');
         }, (error) => {
             firebase.auth().languageCode = 'fr';
             Alert.alert(error.message);
@@ -38,35 +39,47 @@ class EcranInscription extends Component {
    
     render() {
         return (
-            <KeyboardAvoidingView behavior='position' style={styleInscription.container}>
+        //<ScrollView>
+            <KeyboardAvoidingView behavior="padding" style={styleInscription.container}>
                 <View style={styleInscription.titre}>
-                    <Text style={{ fontSize: 20 }}>inscription</Text>
+                    <Text style={{ fontSize: 20 }}>Inscription</Text>
                 </View>
+            
                 <FormLabel>nom</FormLabel>
-                <FormInput
+                <TextInput
+                  style={styleInscription.inputBox}
                   value={this.state.nom}
                   onChangeText={(nom) => { this.setState({ nom }); }}
+                  underlineColorAndroid='transparent'
                 />
                 <FormLabel>prenom</FormLabel>
-                <FormInput
+                <TextInput
+                    style={styleInscription.inputBox}
                     value={this.state.prenom}
                     onChangeText={(prenom) => { this.setState({ prenom }); }}
+                    underlineColorAndroid='transparent'
                 />
                 <FormLabel>email</FormLabel>
-                <FormInput 
+                <TextInput
+                    style={styleInscription.inputBox}
                     keyboardType='email-address' 
                     value={this.state.email}
                     onChangeText={(email) => { this.setState({ email }); }}
+                    underlineColorAndroid='transparent'
                 />
                 <FormLabel>mot de passe</FormLabel>
-                <FormInput 
+                <TextInput
+                  style={styleInscription.inputBox}
                   value={this.state.password}
                   onChangeText={(password) => { this.setState({ password }); }}
+                  underlineColorAndroid='transparent'
                 />
                 <FormLabel> confirmer mot de passe</FormLabel>
-                <FormInput 
+                <TextInput
+                  style={styleInscription.inputBox} 
                   value={this.state.confirmPassword}
                   onChangeText={(confirmPassword) => { this.setState({ confirmPassword }); }}
+                  underlineColorAndroid='transparent'
                 />
                 <Button 
                     onPress={this.onPressInscription}
@@ -78,11 +91,12 @@ class EcranInscription extends Component {
                         borderColor: 'transparent',
                         borderWidth: 0,
                         borderRadius: 5,
-                        top: 37
-                        
+                        top: 37,
                       }}
                 />
+       
             </KeyboardAvoidingView>
+        //</ScrollView>
         );
     }
 }
@@ -91,18 +105,28 @@ export default EcranInscription;
 
 const styleInscription = StyleSheet.create({
         container: {
+            flex: 1,
             backgroundColor: 'white',
             borderColor: '#ce5e4b',
-            borderWidth: 2,
+            borderWidth: 1,
               borderRadius: 5,
               padding: 2,
               margin: 4,
-              flex: 1,
-              
+                   
         },
-        titre: {
-            
+        titre: {            
             justifyContent: 'center',
             alignItems: 'center'
+        },
+        inputBox: {
+            borderBottomColor: '#ce5e4b',
+            marginLeft: 5,
+            marginRight: 5,
+            height: 50,
+            borderColor: '#ce5e4b',
+            borderWidth: 1,
+            paddingLeft: 5,
+            borderRadius: 5,
+            
         }
 });

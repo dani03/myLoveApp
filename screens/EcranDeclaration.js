@@ -1,31 +1,27 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { Header, Icon } from 'native-base';
-
+import { View, Text, StyleSheet } from 'react-native';
+import LogoHomme from '../components/Declaration/LogoHomme';
+import LogoFemme from '../components/Declaration/LogoFemme';
 
 class EcranDeclaration extends Component {
     static navigationOptions = {
-        drawerIcon: (
-            <Image 
-            source={require('../components/img/logo/A-Propos.png')}
-            style={{ height: 24, width: 24 }} 
-
-            />
-        )
+        header: null
     }
     render() {
         return (
-            <View style={styles.container}>  
-            <Header 
-            style={{
-                backgroundColor: 'white',
-                justifyContent: 'flex-start',
-                alignItems: 'flex-end' 
-                }}
-            />
-
-            <Text>ecran EcranDeclaration </Text>
-        </View>
+            <View style={styles.container}>
+                <View style={{ top: 90 }}>
+                    <Text>Je souhaite declarer mon amour à: </Text>
+                </View>
+                <View style={styles.logo}>
+                    <View style={styles.cadreLogo}>
+                        <LogoHomme />
+                    </View> 
+                    <View style={styles.cadreLogo}>
+                        <LogoFemme />
+                    </View>          
+                </View>
+            </View>
         );
     }
 }
@@ -33,7 +29,25 @@ class EcranDeclaration extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF'
+        backgroundColor: '#FFF',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+        
+    },
+    logo: {
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        width: '90%',
+        flexDirection: 'row'
+    },
+    cadreLogo: {
+        backgroundColor: 'transparent',
+        borderColor: '#ce5e4b',
+        borderWidth: 1,
+        height: '50%',
+        width: 110,
+        justifyContent: 'center',
+        borderRadius: 2
     }
 });
 

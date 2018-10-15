@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text, Alert, KeyboardAvoidingView } from 'react-native';
-import { FormLabel, FormInput, Button } from 'react-native-elements';
+import { View, StyleSheet, Text, TextInput, Alert,
+     KeyboardAvoidingView, ScrollView } from 'react-native';
+import { FormLabel, Button } from 'react-native-elements';
 import * as firebase from 'firebase';
+import Coeur from '../components/coeur';
 
 
 class EcranConnexion extends React.Component {
@@ -28,33 +30,34 @@ class EcranConnexion extends React.Component {
     
   render() { 
       return (
-      <KeyboardAvoidingView behavior='position' style={connexionStyle.connectContainer}>
+    
+      <KeyboardAvoidingView behavior='position' style={Style.connectContainer}>
         <View style={{ justifyContent: 'center', alignItems: 'center', top: 20 }}>
-            <Image 
-                style={{ height: 70, width: 80 }} 
-                source={require('../components/img/coeur-my-love.png')} 
-            />
-            <Text style={connexionStyle.titre}>My Love</Text>
+            <Coeur />
+            <Text style={Style.titre}>My Love</Text>
         </View>
-         <View style={connexionStyle.formulaire}>
+         <View style={Style.formulaire}>
             <FormLabel>Email</FormLabel>
-                <FormInput 
-                    style={connexionStyle.inputBox}
+                <TextInput 
+                    style={Style.inputBox}
                     placeholder='exemple@gmail.com'
                     keyboardType='email-address'
                     selectionColor='#ce5e4b'
                     value={this.state.email}
                     onChangeText={(email) => { this.setState({ email }); }}
-                    underlineColorAndroid='#ce5e4b'
+                    underlineColorAndroid='transparent'
+                    
                 />
             <FormLabel>Mot de passe</FormLabel>
-                <FormInput 
-                    style={connexionStyle.inputBox}
+                <TextInput 
+                    style={Style.inputBox}
                     placeholder='mot de passe'
                     secureTextEntry true
                     value={this.state.password}
                     onChangeText={(password) => { this.setState({ password }); }}
                     underlineColorAndroid='#ce5e4b'
+                    selectionColor='#ce5e4b'
+                    underlineColorAndroid='transparent'
                 />
             <Button 
             onPress={this.onPressconnexion}
@@ -66,9 +69,8 @@ class EcranConnexion extends React.Component {
                     borderColor: 'transparent',
                     borderWidth: 0,
                     borderRadius: 5,
-                    top: 37
-                    
-                  }}
+                    top: 37   
+                }}
             />
         </View>
         </KeyboardAvoidingView>
@@ -76,7 +78,7 @@ class EcranConnexion extends React.Component {
   }
 }
 
-const connexionStyle = StyleSheet.create({
+const Style = StyleSheet.create({
     connectContainer: {
         backgroundColor: 'white',
         flex: 1
@@ -91,7 +93,13 @@ const connexionStyle = StyleSheet.create({
     },
     inputBox: {
         borderBottomColor: '#ce5e4b',
-
+        marginLeft: 5,
+        marginRight: 5,
+        height: 50,
+        borderColor: '#ce5e4b',
+        borderWidth: 1,
+        paddingLeft: 5,
+        borderRadius: 5,
     }
 
 });
