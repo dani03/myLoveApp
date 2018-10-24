@@ -8,6 +8,8 @@ import EcranConnexion from './screens/EcranConnexion';
 import HomeScreen from './screens/HomeScreen';
 import apiKeys from './keys/apiKeys';
 import EcranDureeRelation from './screens/EcranDureeRelation';
+import EcranEtape2 from './screens/EcranEtape2';
+import EcranEtape3 from './screens/EcranEtape3';
 
 const MainNavigator = createStackNavigator(
   {
@@ -15,9 +17,9 @@ const MainNavigator = createStackNavigator(
     connexion: EcranConnexion,
     inscription: EcranInscription,
     declaration: EcranDeDeclaration,
-    dureeRelation: EcranDureeRelation
-    
-    
+    dureeRelation: EcranDureeRelation,
+    Etape2: EcranEtape2,
+    Etape3: EcranEtape3,
   },
   {
     initialRouteName: 'declaration', //Home

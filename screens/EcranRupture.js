@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { Header, Icon } from 'native-base';
+import { Header } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 class Ecranrupture extends Component {
@@ -23,13 +24,12 @@ class Ecranrupture extends Component {
                 alignItems: 'flex-end' 
           }}>
                
-                    <Icon 
-                        name='menu'
-                        onPress={() => this.props.navigation.openDrawer()}
-                        Color='#ce5e4b'
-                        
-                    />
-                
+                <Icon 
+                    name='reorder'
+                    onPress={() => this.props.navigation.openDrawer()}
+                    color='#ce5e4b'
+                    size={25}
+                />
             </Header>
             <Text>ecran de rupture relation </Text>
         </View>

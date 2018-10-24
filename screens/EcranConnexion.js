@@ -31,7 +31,7 @@ class EcranConnexion extends React.Component {
   render() { 
       return (
     
-      <KeyboardAvoidingView behavior='position' style={Style.connectContainer}>
+      <KeyboardAvoidingView behavior='position' enabled style={Style.connectContainer}>
         <View style={{ justifyContent: 'center', alignItems: 'center', top: 20 }}>
             <Coeur />
             <Text style={Style.titre}>My Love</Text>
@@ -45,8 +45,7 @@ class EcranConnexion extends React.Component {
                     selectionColor='#ce5e4b'
                     value={this.state.email}
                     onChangeText={(email) => { this.setState({ email }); }}
-                    underlineColorAndroid='transparent'
-                    
+                    underlineColorAndroid='transparent'    
                 />
             <FormLabel>Mot de passe</FormLabel>
                 <TextInput 

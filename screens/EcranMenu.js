@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, } from 'react-native';
-import { Header, Icon } from 'native-base';
+import { Header } from 'native-base';
 import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import GrandCoeur from '../components/GrandCoeur';
 
 class EcranMenu extends Component {
@@ -11,7 +12,6 @@ class EcranMenu extends Component {
             <Image 
             source={require('../components/img/logo/Mon-Profil.png')}
             style={{ height: 24, width: 24 }} 
-
             />
         )
     }
@@ -26,13 +26,13 @@ class EcranMenu extends Component {
               }}>
                    
                         <Icon 
-                            name='menu'
+                            name='reorder'
                             onPress={() => this.props.navigation.openDrawer()}
-                            Color='#ce5e4b'
-                            
+                            color='#ce5e4b'
+                            size={25}
                         />
                     <View style={{ left: 100 }}>
-                        <Text style={{ color: '#ce5e4b', fontSize: 20 }}> My Love </Text>
+                        <Text style={{ color: '#ce5e4b', fontSize: 25 }}> My Love </Text>
                     </View>
                 </Header>
         

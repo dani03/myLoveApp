@@ -8,8 +8,6 @@ class Coeur extends React.Component {
                 <View>
                     <Image style={styles.drawerImage} source={require('./img/coeur-my-love.png')} />
                 </View>
-
-                
             );
         }
 }

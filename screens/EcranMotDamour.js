@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { Header, Icon } from 'native-base';
-
+import { Header } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class EcranMotDamour extends Component {
     static navigationOptions = {
@@ -25,12 +25,11 @@ class EcranMotDamour extends Component {
           }}>
                
                     <Icon 
-                        name='menu'
+                        name='reorder'
                         onPress={() => this.props.navigation.openDrawer()}
-                        
-                        
+                        color='#ce5e4b'
+                        size={25}
                     />
-                
             </Header>
             <Text>ecran de mot d'amour </Text>
         </View>

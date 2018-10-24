@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Alert,
-     KeyboardAvoidingView, TextInput, ScrollView } from 'react-native';
+     KeyboardAvoidingView, TextInput, ScrollView, Keyboard } from 'react-native';
 import { FormLabel, Button } from 'react-native-elements';
 import * as firebase from 'firebase';
 
@@ -32,19 +32,17 @@ class EcranInscription extends Component {
             Alert.alert('inscription reussie');
             this.props.navigation.push('declaration');
         }, (error) => {
-            firebase.auth().languageCode = 'fr';
             Alert.alert(error.message);
         });
     }
    
     render() {
         return (
-        //<ScrollView>
-            <KeyboardAvoidingView behavior="padding" style={styleInscription.container}>
+        <ScrollView style={styleInscription.container}>
+            <KeyboardAvoidingView behavior="padding" enabled style={{ height: 800 }}>
                 <View style={styleInscription.titre}>
                     <Text style={{ fontSize: 20 }}>Inscription</Text>
                 </View>
-            
                 <FormLabel>nom</FormLabel>
                 <TextInput
                   style={styleInscription.inputBox}
@@ -80,6 +78,7 @@ class EcranInscription extends Component {
                   value={this.state.confirmPassword}
                   onChangeText={(confirmPassword) => { this.setState({ confirmPassword }); }}
                   underlineColorAndroid='transparent'
+                    
                 />
                 <Button 
                     onPress={this.onPressInscription}
@@ -91,12 +90,12 @@ class EcranInscription extends Component {
                         borderColor: 'transparent',
                         borderWidth: 0,
                         borderRadius: 5,
-                        top: 37,
+                        top: 37,                      
                       }}
                 />
        
             </KeyboardAvoidingView>
-        //</ScrollView>
+        </ScrollView>
         );
     }
 }
@@ -105,14 +104,13 @@ export default EcranInscription;
 
 const styleInscription = StyleSheet.create({
         container: {
-            flex: 1,
+           flex: 1,
             backgroundColor: 'white',
             borderColor: '#ce5e4b',
             borderWidth: 1,
-              borderRadius: 5,
-              padding: 2,
+              borderRadius: 5,   
               margin: 4,
-                   
+ 
         },
         titre: {            
             justifyContent: 'center',

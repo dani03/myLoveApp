@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { Header, Icon } from 'native-base';
+import { Header } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 class EcranPartagerlApp extends Component {
@@ -24,12 +25,12 @@ class EcranPartagerlApp extends Component {
                 
           }}>
                
-                    <Icon 
-                        name='menu'
-                        color='red'
-                        
-                        onPress={() => this.props.navigation.openDrawer()} 
-                    />
+                        <Icon 
+                            name='reorder'
+                            onPress={() => this.props.navigation.openDrawer()}
+                            color='#ce5e4b'
+                            size={25}
+                        />
                 <View style={{ left: 100 }}>
                         <Text style={{ color: '#ce5e4b', fontSize: 20 }}> My Love </Text>
                 </View>
@@ -49,7 +50,7 @@ class EcranPartagerlApp extends Component {
                         style={styles.images} 
                         source={require('../components/LogoSociaux/facebook-770688_960_720.png')} 
                      />
-                     <Text>FaceBook</Text>
+                     <Text>Facebook</Text>
                  </View>
                  <View style={styles.blockLogo}>
                      <Image 
@@ -84,7 +85,7 @@ class EcranPartagerlApp extends Component {
                         style={styles.images} 
                         source={require('../components/LogoSociaux/snapchat-logo.jpg')} 
                      />
-                     <Text>SnapChat</Text>
+                     <Text>Snapchat</Text>
                     </View>
                  </View>
             </View>
@@ -104,8 +105,8 @@ const styles = StyleSheet.create({
         top: '20%'
     },
     images: {
-        height: 70,
-         width: 70,
+        height: 50,
+         width: 50,
          marginTop: 15,
          borderRadius: 3    
     },
