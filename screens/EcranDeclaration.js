@@ -22,11 +22,11 @@ class EcranDeclaration extends Component {
         this.props.navigation.navigate('Etape2');
     }
     render() {
-        const { toggle } = this.state;
-        const IconFemme = toggle ? <LogoFemmeBlanc /> : <LogoFemme />;
-        const bground = toggle ? '#ce5e4b' : 'white';
-        const IconHomme = toggle ? <LogoHomme /> : <LogoHommeBlanc />;
-        const background = toggle ? 'white' : '#ce5e4b';
+        //const { toggle } = this.state;
+        //const IconFemme = toggle ? <LogoFemmeBlanc /> : <LogoFemme />;
+        //const bground = toggle ? '#ce5e4b' : 'white';
+        //const IconHomme = toggle ? <LogoHomme /> : <LogoHommeBlanc />;
+        //const background = toggle ? 'white' : '#ce5e4b';
         return (
             <View style={styles.container}>
                 <View style={{ justifyContent: 'center' }}>
@@ -39,7 +39,7 @@ class EcranDeclaration extends Component {
                     <TouchableOpacity 
                     onPress={this.onpressLogo}
                     
-                       style={{ backgroundColor: background,
+                       style={{ backgroundColor: 'transparent',
                                 borderColor: '#ce5e4b',
                                 borderWidth: 1,
                                 height: '50%',
@@ -48,11 +48,11 @@ class EcranDeclaration extends Component {
                                 borderRadius: 2
                             }}
                     >
-                        {IconHomme}
+                        <LogoHomme />
                     </TouchableOpacity> 
                     <TouchableOpacity 
                         onPress={this.onpressLogo}
-                        style={{ backgroundColor: bground,
+                        style={{ backgroundColor: 'transparent',
                                 borderColor: '#ce5e4b',
                                 borderWidth: 1,
                                 height: '50%',
@@ -61,7 +61,7 @@ class EcranDeclaration extends Component {
                                 borderRadius: 2
                             }}
                     >
-                        {IconFemme}
+                        <LogoFemme />
                     </TouchableOpacity>
                     <View style={styles.logo}>
                         <Text>homme</Text>

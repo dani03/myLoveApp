@@ -18,7 +18,7 @@ class EcranEtape2 extends Component {
    
         validatePrenom = () => {
             console.log('validation');
-            if (this.state.prenom !== null || (this.state.prenom) < 3) {
+            if (this.state.prenom === '') {
                 Alert.alert('un prenom est requis');
                 return;
             }

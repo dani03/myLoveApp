@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, TextInput, Alert,
-     KeyboardAvoidingView, ScrollView } from 'react-native';
+     KeyboardAvoidingView } from 'react-native';
 import { FormLabel, Button } from 'react-native-elements';
 import * as firebase from 'firebase';
 import Coeur from '../components/coeur';
