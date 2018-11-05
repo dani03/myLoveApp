@@ -4,6 +4,7 @@ import { View, StyleSheet, Text, TextInput, Alert,
 import { FormLabel, Button } from 'react-native-elements';
 import * as firebase from 'firebase';
 import Coeur from '../components/coeur';
+import Spinner from '../components/Spinner';
 
 
 class EcranConnexion extends React.Component {
@@ -15,19 +16,52 @@ class EcranConnexion extends React.Component {
         this.state = { 
             email: '',
             password: '',
+            loading: false
         };
     }
+    
    
     onPressconnexion = () => {
+        this.setState({ loading: true });
+        
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(() => {         
+        .then(() => { 
+            this.setState({ loading: false });       
             Alert.alert('vous etes connecté');
             this.props.navigation.navigate('dureeRelation');
         }, (error) => {
+                this.setState({ loading: false }); 
                 Alert.alert(error.message);
         });
     }
     
+    onloginSucess= () => {
+        this.setState({
+            email: '',
+            password: '',
+            loading: false
+        });
+    }
+    renderButton = () => {
+        if (this.state.loading) {
+            return <Spinner size='small' />;
+        }
+        return (
+            <Button 
+            onPress={this.onPressconnexion}
+                title='connexion'
+                buttonStyle={{
+                    backgroundColor: '#ce5e4b',
+                    width: 300,
+                    height: 45,
+                    borderColor: 'transparent',
+                    borderWidth: 0,
+                    borderRadius: 5,
+                    top: 37   
+                }}
+            />
+        );
+    }
   render() { 
       return (
     
@@ -39,6 +73,7 @@ class EcranConnexion extends React.Component {
          <View style={Style.formulaire}>
             <FormLabel>Email</FormLabel>
                 <TextInput 
+                    //autoCorrect={false}
                     style={Style.inputBox}
                     placeholder='exemple@gmail.com'
                     keyboardType='email-address'
@@ -57,20 +92,9 @@ class EcranConnexion extends React.Component {
                     underlineColorAndroid='#ce5e4b'
                     selectionColor='#ce5e4b'
                     underlineColorAndroid='transparent'
+                    autoCorrect={false}
                 />
-            <Button 
-            onPress={this.onPressconnexion}
-                title='connexion'
-                buttonStyle={{
-                    backgroundColor: '#ce5e4b',
-                    width: 300,
-                    height: 45,
-                    borderColor: 'transparent',
-                    borderWidth: 0,
-                    borderRadius: 5,
-                    top: 37   
-                }}
-            />
+            {this.renderButton()}
         </View>
         </KeyboardAvoidingView>
     );

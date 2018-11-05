@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { Header, Icon } from 'native-base';
+import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import firebase from 'firebase';
 
 
 class EcranDeconnexion extends Component {
@@ -15,23 +15,25 @@ class EcranDeconnexion extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>  
-            <Header 
-            style={{
-                backgroundColor: 'white',
-                justifyContent: 'flex-start',
-                alignItems: 'flex-end' 
-          }}>
-               
-                    <Icon 
-                        name='menu'
-                        onPress={() => this.props.navigation.openDrawer()}
-                        Color='#ce5e4b'
-                        
-                    />
-                
-            </Header>
-            <Text>ecran deconnexion </Text>
+            <View style={styles.container}>
+                <Text>se deconnecter ?</Text>
+            <Button 
+                title='oui'
+                onPress={
+                    console.log('la'), 
+                    () => firebase.auth().signOut()} 
+                buttonStyle={{
+                    backgroundColor: '#ce5e4b',
+                    width: 300,
+                    height: 50,
+                    borderColor: 'transparent',
+                    borderWidth: 0,
+                    borderRadius: 5,
+                    color: '#000'
+                      
+                }}
+            />
+
         </View>
         );
     }
@@ -40,7 +42,10 @@ class EcranDeconnexion extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF'
-    }
+        backgroundColor: '#FFF',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
 });
 export default EcranDeconnexion;

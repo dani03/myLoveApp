@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Alert,
-     KeyboardAvoidingView, TextInput, ScrollView, Keyboard } from 'react-native';
+     KeyboardAvoidingView, TextInput, ScrollView } from 'react-native';
 import { FormLabel, Button } from 'react-native-elements';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
+import Spinner from '../components/Spinner';
 
 class EcranInscription extends Component {
     static navigationOptions = {
@@ -12,75 +13,65 @@ class EcranInscription extends Component {
     }
     constructor(props) {
         super(props);
+        console.ignoredYellowBox = [
+            'Setting a timer'
+            ];
         this.state = {
             email: '',
             password: '',
+            confirmPassword: '',
             nom: '',
             prenom: '',
-            confirmPassword: ''
+            isLoading: false,
+            
         };
     }
-    
+  
     onPressInscription = () => {
+        this.setState({ isLoading: true });
         //avant on verifie si les mots de passes sont identiques
         if (this.state.password !== this.state.confirmPassword) {
             Alert.alert('les mots de passes ne correspondent pas...');
             return;
         }
+        this.componentwillMount();
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then(() => {          
+        .then(() => { 
+            this.setState({ isLoading: false });         
             Alert.alert('inscription reussie');
-            this.props.navigation.push('declaration');
+            this.props.navigation.navigate('declaration');
         }, (error) => {
+            this.setState({ isLoading: false });
             Alert.alert(error.message);
-        });
+        });  
     }
-   
-    render() {
+    componentwillMount() {
+        const nom = this.state.nom;
+        const prenom = this.state.prenom;
+        if (nom.length <= 2 && prenom !== '') {
+            Alert.alert('vos noms et prenoms sont requis');
+            return;
+        } 
+            
+                firebase.database().ref('users').push(
+                    {
+                      nom: this.state.nom,
+                      prenom: this.state.prenom,
+                      email: this.state.email,
+                    }
+                  ).then(() => {
+                      console.log('données enregistrees'); 
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });       
+    }
+    renderButton = () => {
+        if (this.state.isLoading) {
+            return <Spinner />;
+        } 
         return (
-        <ScrollView style={styleInscription.container}>
-            <KeyboardAvoidingView behavior="padding" enabled style={{ height: 800 }}>
-                <View style={styleInscription.titre}>
-                    <Text style={{ fontSize: 20 }}>Inscription</Text>
-                </View>
-                <FormLabel>nom</FormLabel>
-                <TextInput
-                  style={styleInscription.inputBox}
-                  value={this.state.nom}
-                  onChangeText={(nom) => { this.setState({ nom }); }}
-                  underlineColorAndroid='transparent'
-                />
-                <FormLabel>prenom</FormLabel>
-                <TextInput
-                    style={styleInscription.inputBox}
-                    value={this.state.prenom}
-                    onChangeText={(prenom) => { this.setState({ prenom }); }}
-                    underlineColorAndroid='transparent'
-                />
-                <FormLabel>email</FormLabel>
-                <TextInput
-                    style={styleInscription.inputBox}
-                    keyboardType='email-address' 
-                    value={this.state.email}
-                    onChangeText={(email) => { this.setState({ email }); }}
-                    underlineColorAndroid='transparent'
-                />
-                <FormLabel>mot de passe</FormLabel>
-                <TextInput
-                  style={styleInscription.inputBox}
-                  value={this.state.password}
-                  onChangeText={(password) => { this.setState({ password }); }}
-                  underlineColorAndroid='transparent'
-                />
-                <FormLabel> confirmer mot de passe</FormLabel>
-                <TextInput
-                  style={styleInscription.inputBox} 
-                  value={this.state.confirmPassword}
-                  onChangeText={(confirmPassword) => { this.setState({ confirmPassword }); }}
-                  underlineColorAndroid='transparent'
-                    
-                />
-                <Button 
+            <Button 
                     onPress={this.onPressInscription}
                     title='valider'
                     buttonStyle={{
@@ -92,8 +83,61 @@ class EcranInscription extends Component {
                         borderRadius: 5,
                         top: 37,                      
                       }}
+            />
+        );
+    }
+    render() {
+        return (
+        <ScrollView style={styleInscription.container}>
+            <KeyboardAvoidingView behavior="padding" enabled style={{ height: 800 }}>
+                <View style={styleInscription.titre}>
+                    <Text style={{ fontSize: 20 }}>Inscription</Text>
+                </View>
+                <FormLabel>nom</FormLabel>
+                <TextInput
+                    autoCorrect={false}
+                  style={styleInscription.inputBox}
+                  value={this.state.nom}
+                  onChangeText={(nom) => { this.setState({ nom }); }}
+                  underlineColorAndroid='transparent'
                 />
-       
+                <FormLabel>prenom</FormLabel>
+                <TextInput
+                    autoCorrect={false}
+                    style={styleInscription.inputBox}
+                    value={this.state.prenom}
+                    onChangeText={(prenom) => { this.setState({ prenom }); }}
+                    underlineColorAndroid='transparent'
+                />
+                <FormLabel>email</FormLabel>
+                <TextInput
+                    autoCorrect={false}
+                    style={styleInscription.inputBox}
+                    keyboardType='email-address' 
+                    value={this.state.email}
+                    onChangeText={(email) => { this.setState({ email }); }}
+                    underlineColorAndroid='transparent'
+                />
+                <FormLabel>mot de passe</FormLabel>
+                <TextInput
+                  autoCorrect={false}
+                  style={styleInscription.inputBox}
+                  value={this.state.password}
+                  onChangeText={(password) => { this.setState({ password }); }}
+                  underlineColorAndroid='transparent'
+                />
+                <FormLabel> confirmer mot de passe</FormLabel>
+                <TextInput
+                  autoCorrect={false}
+                  style={styleInscription.inputBox} 
+                  value={this.state.confirmPassword}
+                  onChangeText={(confirmPassword) => { this.setState({ confirmPassword }); }}
+                  underlineColorAndroid='transparent'
+                    
+                />
+            <View>
+                {this.renderButton()}
+            </View>
             </KeyboardAvoidingView>
         </ScrollView>
         );

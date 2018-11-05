@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput,
      KeyboardAvoidingView, Alert } from 'react-native';
      import { Button } from 'react-native-elements';
-import MyButton from '../components/MyButton/MyButton';
 
 class EcranEtape2 extends Component {
     static navigationOptions = {
@@ -12,7 +11,7 @@ class EcranEtape2 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            prenom: '',
+            Partenaire: '',
         };
     }
    
@@ -38,8 +37,8 @@ class EcranEtape2 extends Component {
                             style={styles.inputBox}
                             placeholder='son prenom...'
                             underlineColorAndroid='transparent'
-                            value={this.state.prenom}
-                            onChangeText={(prenom) => { this.setState({ prenom }); }}
+                            value={this.state.Partenaire}
+                            onChangeText={(Partenaire) => { this.setState({ Partenaire }); }}
                             //
                         /> 
                         <Button

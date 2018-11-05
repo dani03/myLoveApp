@@ -12,21 +12,29 @@ class EcranDeclaration extends Component {
     constructor(props) {
         super(props);
             this.state = { 
-               toggle: false,
+               choice: false,
+               toggle: true
             };
     }
-    onpressLogo = () => {
-        console.log('pressed');
-        const newState = !this.state.toggle;
-        this.setState({ toggle: newState });
+    onpressLogoH = () => {
+        console.log('homme');
+        const newToggle = !this.state.toggle;
+        this.setState({ toggle: newToggle });
+        this.props.navigation.navigate('Etape2');
+    }
+    onpressLogoF = () => {
+        console.log('femme');
+        const newState = !this.state.choice;
+        this.setState({ choice: newState });
         this.props.navigation.navigate('Etape2');
     }
     render() {
-        //const { toggle } = this.state;
-        //const IconFemme = toggle ? <LogoFemmeBlanc /> : <LogoFemme />;
-        //const bground = toggle ? '#ce5e4b' : 'white';
-        //const IconHomme = toggle ? <LogoHomme /> : <LogoHommeBlanc />;
-        //const background = toggle ? 'white' : '#ce5e4b';
+      const { choice } = this.state;
+      const { toggle } = this.state;
+        const IconFemme = choice ? <LogoFemmeBlanc /> : <LogoFemme />;
+        const bground = choice ? '#ce5e4b' : 'white';
+        const IconHomme = toggle ? <LogoHomme /> : <LogoHommeBlanc />;
+        const background = toggle ? 'white' : '#ce5e4b';
         return (
             <View style={styles.container}>
                 <View style={{ justifyContent: 'center' }}>
@@ -37,9 +45,9 @@ class EcranDeclaration extends Component {
                 </View>
                 <View style={styles.logo}>
                     <TouchableOpacity 
-                    onPress={this.onpressLogo}
+                    onPress={this.onpressLogoH}
                     
-                       style={{ backgroundColor: 'transparent',
+                       style={{ backgroundColor: background,
                                 borderColor: '#ce5e4b',
                                 borderWidth: 1,
                                 height: '50%',
@@ -48,11 +56,11 @@ class EcranDeclaration extends Component {
                                 borderRadius: 2
                             }}
                     >
-                        <LogoHomme />
+                        {IconHomme}
                     </TouchableOpacity> 
                     <TouchableOpacity 
-                        onPress={this.onpressLogo}
-                        style={{ backgroundColor: 'transparent',
+                        onPress={this.onpressLogoF}
+                        style={{ backgroundColor: bground,
                                 borderColor: '#ce5e4b',
                                 borderWidth: 1,
                                 height: '50%',
@@ -61,7 +69,7 @@ class EcranDeclaration extends Component {
                                 borderRadius: 2
                             }}
                     >
-                        <LogoFemme />
+                        {IconFemme}
                     </TouchableOpacity>
                     <View style={styles.logo}>
                         <Text>homme</Text>
@@ -83,7 +91,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'   
     },
     logo: {
-        top: 40,
+        
+        top: 30,
         justifyContent: 'space-around',
         alignItems: 'center',
         width: '90%',

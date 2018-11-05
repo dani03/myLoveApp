@@ -19,6 +19,11 @@
   "jest": {
     "preset": "jest-expo"
   },
+  "rnpm": {
+      "assets": [
+        "./assets/fonts"
+      ]
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "eslint-plugin-react-native": "^3.4.0",
@@ -33,10 +38,5 @@
     "react-native-modal": "^2.5.0",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.16.0"
-  },
-  "rnpm": {
-    "assets": [
-      "./assets/fonts"
-    ]
   }
 }

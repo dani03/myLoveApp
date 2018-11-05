@@ -1,10 +1,29 @@
 import React, { Component } from 'react';
+import { Button } from 'react-native-elements';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
 import Coeur from '../components/coeur';
-import MyButton from '../components/MyButton/MyButton';
-//import EcranEtape2 from './EcranEtape2';
 
 class EcranEtape3 extends Component {
+    static navigationOptions = {
+        headerRight: <Text style={{ marginRight: 145, fontSize: 20, color: '#ce5e4b' }}>
+                    My Love</Text>
+    }
+    constructor(props) {
+        super(props);
+        this.state = {
+            auteur: '',
+            error: '',
+            message: ''
+        };
+    }
+    pressed = () => {
+        console.log('aller a letape 4');
+        if (this.state.auteur === '' && this.state.message === '') {
+            this.setState({ error: 'une signature par votre prenom est requise' });
+            return;
+        }
+        this.props.navigation.navigate('Etape4');
+    }
     render() {
         return (
         <ScrollView>
@@ -40,9 +59,24 @@ class EcranEtape3 extends Component {
                         style={styles.inputBox}
                             placeholder='par votre nom...'
                             underlineColorAndroid='transparent'
+                            value={this.state.auteur}
+                            onChangeText={(auteur) => { this.setState({ auteur }); }}
                         />
-                    </View> 
-                    <MyButton />
+                    </View>
+                   <Text style={{ color: 'red', textAlign: 'center' }}> {this.state.error} </Text>
+                    <Button
+                        onPress={this.pressed}
+                        title='Valider'
+                        buttonStyle={{
+                            backgroundColor: '#ce5e4b',
+                            width: 300,
+                            height: 45,
+                            borderColor: 'transparent',
+                            borderWidth: 0,
+                            borderRadius: 5,
+                            top: 37
+                        }}
+                    />
                  </View>
                     <View style={{ marginTop: 85 }}><Text> 3/4 </Text></View>
             </KeyboardAvoidingView>

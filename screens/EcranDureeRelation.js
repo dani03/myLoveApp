@@ -14,11 +14,9 @@ import EcranDeconnexion from './EcranDeconnexion';
 const CustommerdrawerComponent = (props) => (
     <Container>
         <Header style={{ height: 120, backgroundColor: 'white' }}>
-            <Body
-            onPress={() => this.props.navigation.toggleDrawer()}
-             style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <Image
-                 
+                 onPress={() => this.props.navigation.toggleDrawer()}
                  style={styles.image} source={require('../components/img/logo/Croix.png')}
                 />
             </Body>
