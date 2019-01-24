@@ -5,9 +5,10 @@ import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import GrandCoeur from '../components/GrandCoeur';
 
+
 class EcranMenu extends Component {
     static navigationOptions = {
-            Header: null,
+            header: null,
         drawerIcon: (
             <Image 
             source={require('../components/img/logo/Mon-Profil.png')}
@@ -15,8 +16,11 @@ class EcranMenu extends Component {
             />
         )
     }
+    
+    
     render() {
         return (
+
             <View style={styles.container}>  
                 <Header 
                 style={{
@@ -42,6 +46,7 @@ class EcranMenu extends Component {
                 </View>
               
                 <Button 
+                    onPress={() => this.props.navigation.navigate('Date')}
                   title='AJOUTER VOTRE DATE DE RENCONTRE'
                   buttonStyle={{
                     backgroundColor: '#ce5e4b',
@@ -54,7 +59,9 @@ class EcranMenu extends Component {
                     right: -10,   
                   }}
                 />
+               
             </View>
+       
         );
     }
 }

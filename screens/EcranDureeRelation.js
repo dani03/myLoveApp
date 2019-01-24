@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image } from 'react-native';
-import { createDrawerNavigator, DrawerItems } from 'react-navigation';
+import { StyleSheet, Image, View, Text } from 'react-native';
+import { createDrawerNavigator, DrawerItems, createStackNavigator } from 'react-navigation';
 import { Header, Container, Content, Body } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import ecranPartageLapp from './EcranPartagerlApp';
 import EcranRupture from './EcranRupture';
 import EcranPulsation from './EcranPulsation';
@@ -9,6 +10,8 @@ import EcranMotDamour from './EcranMotDamour';
 import Apropos from './Apropos';
 import EcranMenu from './EcranMenu';
 import EcranDeconnexion from './EcranDeconnexion';
+import StartEcran from './StartEcran';
+import EcranInscription from './EcranInscription';
 
 
 const CustommerdrawerComponent = (props) => (
@@ -16,7 +19,7 @@ const CustommerdrawerComponent = (props) => (
         <Header style={{ height: 120, backgroundColor: 'white' }}>
             <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <Image
-                 onPress={() => this.props.navigation.toggleDrawer()}
+                 onPress={() => this.props.navigation.closeDrawer()}
                  style={styles.image} source={require('../components/img/logo/Croix.png')}
                 />
             </Body>
@@ -26,11 +29,29 @@ const CustommerdrawerComponent = (props) => (
         </Content>
     </Container>
 );
-
+const menuStackNavigator = createStackNavigator({
+    'mon profil': { screen: EcranMenu,
+        navigationOptions: {
+            header: null,
+            drawerIcon: (
+                <Image 
+                source={require('../components/img/logo/Mon-Profil.png')}
+                style={{ height: 24, width: 24 }} 
+                />
+            )
+        } },
+    
+});
 const AppDrawernavigator = createDrawerNavigator({
-    'Mon Profil': {
-        screen: EcranMenu
-    },
+    'mon profil': { screen: menuStackNavigator,
+        navigationOptions: {
+            drawerIcon: (
+                <Image 
+                source={require('../components/img/logo/Mon-Profil.png')}
+                style={{ height: 24, width: 24 }} 
+                />
+            )
+        } },
     Partager: { screen: ecranPartageLapp },
     'Coeur Pulsation': { screen: EcranPulsation },
     'Mot D\'amour': { screen: EcranMotDamour },
@@ -39,22 +60,20 @@ const AppDrawernavigator = createDrawerNavigator({
     Deconnexion: { screen: EcranDeconnexion },
   }, 
   {
-      initialRouteName: 'Mon Profil',
+     initialRouteName: 'mon profil',
       contentComponent: CustommerdrawerComponent,
-      drawerOpenRoute: 'DrawerOpen',
-      drawerCloseRoute: 'drawerClose',
-      drawerToggleRoute: 'drawerToggle'
+      
   });
 class EcranApp2 extends Component {
     static navigationOptions = {
-        header: () => {
-               
-       }
+        header: null
       }
     render() {
         return (
             
-            <AppDrawernavigator />
+            <AppDrawernavigator>
+                <StartEcran />
+            </AppDrawernavigator>
                 
         );
     }

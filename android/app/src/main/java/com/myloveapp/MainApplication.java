@@ -3,6 +3,7 @@ package com.myloveapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.surajit.rnrg.RNRadialGradientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.learnta.clear.ClearCachePackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNRadialGradientPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
             new ClearCachePackage()

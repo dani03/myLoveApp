@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import * as firebase from 'firebase';
 import LogoHomme from '../components/Declaration/LogoHomme';
 import LogoFemme from '../components/Declaration/LogoFemme';
 import LogoFemmeBlanc from '../components/Declaration/LogoFemmeBlanc';
@@ -13,21 +14,34 @@ class EcranDeclaration extends Component {
         super(props);
             this.state = { 
                choice: false,
-               toggle: true
+               toggle: true,
+               partenaire: ''
             };
     }
     onpressLogoH = () => {
         console.log('homme');
+        this.setState({ partenaire: 'homme' });
         const newToggle = !this.state.toggle;
+       
         this.setState({ toggle: newToggle });
         this.props.navigation.navigate('Etape2');
     }
     onpressLogoF = () => {
         console.log('femme');
+        this.setState({ partenaire: 'femme' });
         const newState = !this.state.choice;
+     
         this.setState({ choice: newState });
         this.props.navigation.navigate('Etape2');
     }
+     sexe = () => {
+     const { currentUser } = firebase.auth();
+     firebase.database().ref(`/users/${currentUser.uid}/`).child('partenaire')
+     .then(() => {
+        console.log('données enregistrees');
+     });
+     }
+
     render() {
       const { choice } = this.state;
       const { toggle } = this.state;
@@ -46,7 +60,7 @@ class EcranDeclaration extends Component {
                 <View style={styles.logo}>
                     <TouchableOpacity 
                     onPress={this.onpressLogoH}
-                    
+                    value={this.state.partenaire}
                        style={{ backgroundColor: background,
                                 borderColor: '#ce5e4b',
                                 borderWidth: 1,
@@ -58,7 +72,8 @@ class EcranDeclaration extends Component {
                     >
                         {IconHomme}
                     </TouchableOpacity> 
-                    <TouchableOpacity 
+                    <TouchableOpacity
+                    value={this.props.partenaire} 
                         onPress={this.onpressLogoF}
                         style={{ backgroundColor: bground,
                                 borderColor: '#ce5e4b',

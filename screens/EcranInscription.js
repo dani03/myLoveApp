@@ -7,15 +7,14 @@ import Spinner from '../components/Spinner';
 
 class EcranInscription extends Component {
     static navigationOptions = {
-        title: 'Mylove',
-        
-
+        headerRight: <Text style={{ marginRight: 145, fontSize: 20, color: '#ce5e4b' }}>
+                    My Love</Text>
     }
     constructor(props) {
         super(props);
         console.ignoredYellowBox = [
-            'Setting a timer'
-            ];
+          'Setting a timer'
+        ];
         this.state = {
             email: '',
             password: '',
@@ -29,42 +28,55 @@ class EcranInscription extends Component {
   
     onPressInscription = () => {
         this.setState({ isLoading: true });
-        //avant on verifie si les mots de passes sont identiques
-        if (this.state.password !== this.state.confirmPassword) {
-            Alert.alert('les mots de passes ne correspondent pas...');
-            return;
-        }
-        this.componentwillMount();
-        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then(() => { 
-            this.setState({ isLoading: false });         
-            Alert.alert('inscription reussie');
-            this.props.navigation.navigate('declaration');
-        }, (error) => {
-            this.setState({ isLoading: false });
-            Alert.alert(error.message);
-        });  
-    }
-    componentwillMount() {
         const nom = this.state.nom;
         const prenom = this.state.prenom;
-        if (nom.length <= 2 && prenom !== '') {
-            Alert.alert('vos noms et prenoms sont requis');
+        //avant on verifie si les mots de passes sont identiques
+        if (this.state.password === this.state.confirmPassword) {
+            this.setState({ isLoading: true });
+            if (nom.length > 2) {
+                if (prenom !== '') {
+                    this.setState({ isLoading: true });
+                    firebase.auth()
+                    .createUserWithEmailAndPassword(this.state.email, this.state.password)
+                    .then(() => { 
+                        this.setState({ isLoading: false });         
+                        Alert.alert('inscription reussie');
+                        this.props.navigation.navigate('dureeRelation');
+                    }, (error) => {
+                        this.setState({ isLoading: false });
+                        Alert.alert(error.message);
+                    });
+                    this.componentwillMount();
+                    return;  
+                }
+                this.setState({ isLoading: false });
+                Alert.alert('un prenom est requis');
+                return;
+            }
+            this.setState({ isLoading: false });
+                Alert.alert('votre nom doit etre superieure à 2 caractères');
+                return;           
+        }
+        Alert.alert('les mots de passes sont differents...');
+            this.setState({ isLoading: false });
             return;
-        } 
-            
-                firebase.database().ref('users').push(
-                    {
-                      nom: this.state.nom,
-                      prenom: this.state.prenom,
-                      email: this.state.email,
-                    }
-                  ).then(() => {
-                      console.log('données enregistrees'); 
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  });       
+    }
+    componentwillMount() {
+        //const { currentUser } = firebase.auth();         
+        firebase.database().ref('users').push(
+            {
+                nom: this.state.nom,
+                prenom: this.state.prenom,
+                email: this.state.email,
+                numero: this.state.numero
+                
+            }
+            ).then(() => {
+                console.log('données enregistrees'); 
+            })
+            .catch((error) => {
+            console.log(error);
+            });       
     }
     renderButton = () => {
         if (this.state.isLoading) {
@@ -118,6 +130,17 @@ class EcranInscription extends Component {
                     onChangeText={(email) => { this.setState({ email }); }}
                     underlineColorAndroid='transparent'
                 />
+                 <FormLabel>numéro</FormLabel>
+                        <TextInput 
+                          style={styleInscription.inputBox}
+                            keyboardType='phone-pad'
+                            placeholder='+33 xx xx xx xx'
+                            underlineColorAndroid='transparent'
+                            editable true
+                            maxLength={12}
+                            value={this.state.numero}
+                            onChangeText={(numero) => { this.setState({ numero }); }}
+                        />
                 <FormLabel>mot de passe</FormLabel>
                 <TextInput
                   autoCorrect={false}

@@ -8,9 +8,7 @@ import { style } from '../components/header/styles';
 
  class HomeScreen extends Component {
    static navigationOptions = {
-     header: () => {
-            
-    }
+     header: null
    }
   render() {
     return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Share, TouchableOpacity } from 'react-native';
 import { Header } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -13,6 +13,27 @@ class EcranPartagerlApp extends Component {
 
             />
         )
+    }
+    constructor(props) {
+        super(props);
+        this.state = {
+            result: '',
+        };
+    }
+    result = (result) => {
+        this.setState({ result });
+    }
+    fancyShareMessage = () => {
+        Share.share({
+            title: 'partagez via',
+            url: 'www.youtube.com',
+            message: 'je t\'invite à télécharger My love',   
+        }, {
+            //android
+            dialogTitle: 'partager via',
+            //ios
+            excludedActivityTypes: ['com.apple.UIkit.activity.postToTwitter']
+        }).then(this.result);
     }
     render() {
         return (
@@ -45,48 +66,48 @@ class EcranPartagerlApp extends Component {
             <View style={styles.boxReseaux}>
                  <Text> je partage mon amour par </Text>
                  <View style={styles.logo}>
-                 <View style={styles.blockLogo}>
+                 <TouchableOpacity onPress={this.fancyShareMessage} style={styles.blockLogo}>
                      <Image 
                         style={styles.images} 
                         source={require('../components/LogoSociaux/facebook-770688_960_720.png')} 
                      />
                      <Text>Facebook</Text>
-                 </View>
-                 <View style={styles.blockLogo}>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={this.fancyShareMessage} style={styles.blockLogo}>
                      <Image 
                         style={styles.images} 
                         source={require('../components/LogoSociaux/messenger.jpg')} 
                      />
                      <Text>Messenger</Text>
-                 </View>
-                 <View style={styles.blockLogo}>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={this.fancyShareMessage} style={styles.blockLogo}>
                      <Image 
                         style={styles.images} 
                         source={require('../components/LogoSociaux/whatsapp.png')} 
                      />
                      <Text>WhatsApp</Text>
-                 </View>
-                    <View style={styles.blockLogo}>
+                 </TouchableOpacity>
+                    <TouchableOpacity onPress={this.fancyShareMessage} style={styles.blockLogo}>
                      <Image 
                         style={styles.images} 
                         source={require('../components/LogoSociaux/twitter.jpg')} 
                      />
                      <Text>Twitter</Text>
-                    </View>
-                    <View style={styles.blockLogo}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.fancyShareMessage} style={styles.blockLogo}>
                      <Image 
                         style={styles.images} 
                         source={require('../components/LogoSociaux/gsmarena_001.jpg')} 
                      />
                      <Text>Messages</Text>
-                    </View>
-                    <View style={styles.blockLogo}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.fancyShareMessage} style={styles.blockLogo}>
                      <Image 
                         style={styles.images} 
                         source={require('../components/LogoSociaux/snapchat-logo.jpg')} 
                      />
                      <Text>Snapchat</Text>
-                    </View>
+                    </TouchableOpacity>
                  </View>
             </View>
         </View>

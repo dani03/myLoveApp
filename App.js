@@ -1,33 +1,11 @@
 import React from 'react';
-import { createStackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
-
-import EcranInscription from './screens/EcranInscription';
-import EcranDeclaration from './screens/EcranDeclaration';
-import EcranConnexion from './screens/EcranConnexion';
 import HomeScreen from './screens/HomeScreen';
-//import apiKeys from './keys/apiKeys';
+
 import EcranDureeRelation from './screens/EcranDureeRelation';
-import EcranEtape2 from './screens/EcranEtape2';
-import EcranEtape3 from './screens/EcranEtape3';
-import EcranEtape4 from './screens/EcranEtape4';
 import Spinner from './components/Spinner';
 
-const MainNavigator = createStackNavigator(
-  {
-    Home: HomeScreen,
-    connexion: EcranConnexion,
-    inscription: EcranInscription,
-    declaration: EcranDeclaration,
-    dureeRelation: EcranDureeRelation,
-    Etape2: EcranEtape2,
-    Etape3: EcranEtape3,
-    Etape4: EcranEtape4,
-  },
-  {
-    initialRouteName: 'Etape4'
-  }
-);
+import MainNavigator from './components/navigation/StackNavigation';
    //initialisation de firebase
    const firebaseConfig = {
     apiKey: 'AIzaSyDbnrz0dWT2ZaBSA2Su8cnNvsSdpBhsz5w',

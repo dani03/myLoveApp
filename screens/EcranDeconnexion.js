@@ -19,9 +19,7 @@ class EcranDeconnexion extends Component {
                 <Text>se deconnecter ?</Text>
             <Button 
                 title='oui'
-                onPress={
-                    console.log('la'), 
-                    () => firebase.auth().signOut()} 
+                onPress={() => firebase.auth().signOut()} 
                 buttonStyle={{
                     backgroundColor: '#ce5e4b',
                     width: 300,
