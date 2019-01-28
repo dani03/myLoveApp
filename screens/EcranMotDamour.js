@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Button } from 'react-native';
 import { Header } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -31,7 +31,25 @@ class EcranMotDamour extends Component {
                         size={25}
                     />
             </Header>
-            <Text>ecran de mot d'amour </Text>
+            <View>
+            <Button 
+                    onPress={() => this.props.navigation.navigate('Rupture')}
+                  title='AJOUTER VOTRE DATE DE RENCONTRE'
+                  buttonStyle={{
+                    backgroundColor: '#ce5e4b',
+                    width: 300,
+                    height: 45,
+                    borderColor: 'transparent',
+                    borderWidth: 0,
+                    borderRadius: 5,
+                    top: '80%',
+                    right: -10,   
+                  }}
+                />
+            </View>
+            <Text>ecran de mot d'amour 
+            
+            </Text>
         </View>
         );
     }

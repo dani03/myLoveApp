@@ -35,9 +35,9 @@ class EcranMenu extends Component {
                             color='#ce5e4b'
                             size={25}
                         />
-                    <View style={{ left: 100 }}>
+                   <View style={{ left: 100 }}>
                         <Text style={{ color: '#ce5e4b', fontSize: 25 }}> My Love </Text>
-                    </View>
+                    </View> 
                 </Header>
         
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -59,7 +59,7 @@ class EcranMenu extends Component {
                     right: -10,   
                   }}
                 />
-               
+               <Text>{this.props.calculsJours} jours</Text>
             </View>
        
         );

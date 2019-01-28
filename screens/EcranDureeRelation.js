@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, View, Text } from 'react-native';
+import { StyleSheet, Image, Text } from 'react-native';
 import { createDrawerNavigator, DrawerItems, createStackNavigator } from 'react-navigation';
 import { Header, Container, Content, Body } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -11,8 +11,7 @@ import Apropos from './Apropos';
 import EcranMenu from './EcranMenu';
 import EcranDeconnexion from './EcranDeconnexion';
 import StartEcran from './StartEcran';
-import EcranInscription from './EcranInscription';
-
+import EcranDate from './EcranDate';
 
 const CustommerdrawerComponent = (props) => (
     <Container>
@@ -42,9 +41,35 @@ const menuStackNavigator = createStackNavigator({
         } },
     
 });
-const AppDrawernavigator = createDrawerNavigator({
-    'mon profil': { screen: menuStackNavigator,
+
+
+const profilStack = createStackNavigator({
+    profil: {
+        screen: menuStackNavigator,
         navigationOptions: {
+            header: null
+           /** headerLeft: (
+                <Icon 
+                    name='reorder'
+                    onPress={() => this.props.navigation.navigate('openDrawer')}
+                    color='#ce5e4b'
+                    size={25}
+                    style={{ paddingLeft: 10 }}
+                />
+            ),
+            headerTitle: (
+            <Text style={{ left: 72, color: '#ce5e4b', fontSize: 25 }}> My Love </Text>) **/
+        } 
+    },
+    Date: {
+        screen: EcranDate
+    }
+});
+
+const AppDrawernavigator = createDrawerNavigator({
+    'mon profil': { screen: profilStack,
+        navigationOptions: {
+
             drawerIcon: (
                 <Image 
                 source={require('../components/img/logo/Mon-Profil.png')}
@@ -62,8 +87,8 @@ const AppDrawernavigator = createDrawerNavigator({
   {
      initialRouteName: 'mon profil',
       contentComponent: CustommerdrawerComponent,
-      
-  });
+});
+
 class EcranApp2 extends Component {
     static navigationOptions = {
         header: null

@@ -117,3 +117,48 @@ const MainNavigator = createStackNavigator(
       }
 );
 export default MainNavigator;
+
+
+
+
+
+
+
+if (`${year}` !== '' && month !== '') {
+  if (`${year}` <= dateActuelle) {
+      if (`${month}` <= dateActuelle) {
+          if (`${day}` <= dateActuelle) {
+              if (`${month}` === 'febuary' && `${day}` <= 29) {
+                  if (dateEntree < dateActuelle) {
+                      // nous devons diviser par 1000,par 60 pour trouver le nombre de minutes
+                      //ensuite par 60 pour trouver le nombre d'heures
+                      // et ensuite par 24 pour trouver le nombre de jour
+                      const calcul = 1000 * 60 * 60 * 24;
+                      const difference = dateActuelle - dateEntree;
+                      const response = Math.floor(difference / calcul);
+                      this.setState({ calculJours: response });
+                      console.log(' ça fait ' + Math.floor(difference / calcul) +
+                      ' jours que vous etes en couple');
+                  } else {
+                      this.setState(
+                          { displayError: 'entrer une date infirieure à la date actuelle' });
+                  }     
+              } else {
+                  this.setState(
+                      { displayError: ' le mois de fevrier ne compte pas ce jour' });
+              }
+          } else {
+              this.setState(
+                  { displayError: 'entrer une date infirieure à la date actuelle' });
+          }
+      } else {
+          this.setState(
+              { displayError: 'le mois entré doit etre inferieure a celui en cours' });
+      }
+  } else {
+      this.setState(
+          { displayError: ' l\'année ne peut être supeireure à celle actuelle' });
+      }
+} else {
+  this.setState({ displayError: 'completés une année ou un mois' });
+}
