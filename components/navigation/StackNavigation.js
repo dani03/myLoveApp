@@ -40,7 +40,7 @@ const MainNavigator = createStackNavigator(
         Deconnexion: EcranDeconnexion,
       },
       {
-        initialRouteName: 'dureeRelation'
+        initialRouteName: 'start'
       }
 );
 export default MainNavigator;

@@ -192,7 +192,7 @@ class EcranDate extends Component {
                 </Picker>
             </View>
                 <View>
-                    <Text> ça fait {this.state.calculJours} jours vous etes en couple</Text>
+                    <Text> ça fait {this.props.calculJours} jours vous etes en couple</Text>
                 </View>
         </KeyboardAvoidingView>
         );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, } from 'react-native';
 import { Header } from 'native-base';
+import firebase from 'firebase';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import GrandCoeur from '../components/GrandCoeur';
@@ -59,7 +60,8 @@ class EcranMenu extends Component {
                     right: -10,   
                   }}
                 />
-               <Text>{this.props.calculsJours} jours</Text>
+                
+               
             </View>
        
         );

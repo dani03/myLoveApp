@@ -1,36 +1,32 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 
 
 class EcranDeconnexion extends Component {
     static navigationOptions = {
-        drawerIcon: (
-            <Image 
-            source={require('../components/img/logo/DeÌconnexion.png')}
-            style={{ height: 24, width: 24 }} 
-
-            />
-        )
+        headerTitle: 'Deconnexion',
     }
     render() {
         return (
             <View style={styles.container}>
                 <Text>se deconnecter ?</Text>
-            <Button 
-                title='oui'
-                onPress={() => firebase.auth().signOut()} 
-                buttonStyle={{
-                    backgroundColor: '#ce5e4b',
-                    width: 300,
-                    height: 50,
-                    borderColor: 'transparent',
-                    borderWidth: 0,
-                    borderRadius: 5,
-                    color: '#000'
-                      
-                }}
-            />
+            <TouchableOpacity 
+            onPress={() => console.log('hello')}
+            style={{ backgroundColor: '#ce5e4b',
+             width: 70,
+              height: 30,
+              justifyContent: 'space-around',
+              alignItems: 'center',
+               }}
+            >
+                    <Text 
+                    
+                    style={{ fontSize: 15, color: 'white', opacity: 2 }}
+                    > 
+                        oui
+                    </Text>
+                </TouchableOpacity>
 
         </View>
         );

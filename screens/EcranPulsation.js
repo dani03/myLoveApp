@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Animated, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Header } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Coeur from '../components/coeur';
+import CoeurBubble from '../components/CoeurBubble';
+import CoeurBubble2 from '../components/CoeurBubble2';
+import CoeurBubble3 from '../components/CoeurBubble3';
+import CoeurBubble4 from '../components/CoeurBubble4';
+import CoeurBubble5 from '../components/CoeurBubble5';
 
 class EcranPulsation extends Component {
     
@@ -36,7 +41,41 @@ class EcranPulsation extends Component {
     }
     renderclaps = () => {
         return this.state.claps.map(countNum =>
-             <CoeurBubble key={countNum} count={countNum} animatedComplete={this.animatedComplete.bind(this)} />);
+             <CoeurBubble
+              key={countNum} count={countNum} animatedComplete={this.animatedComplete}
+             />
+             );
+     }
+     renderclaps2 = () => {
+        return this.state.claps.map(countNum =>
+             <CoeurBubble2 
+              key={countNum} count={countNum} animatedComplete={this.animatedComplete}
+             />
+             );
+     }
+     renderclaps3 = () => {
+        return this.state.claps.map(countNum =>
+             <CoeurBubble3
+             
+              key={countNum} count={countNum} animatedComplete={this.animatedComplete}
+             />
+             );
+     }
+     renderclaps4 = () => {
+        return this.state.claps.map(countNum =>
+             <CoeurBubble4
+             
+              key={countNum} count={countNum} animatedComplete={this.animatedComplete}
+             />
+             );
+     }
+     renderclaps5 = () => {
+        return this.state.claps.map(countNum =>
+             <CoeurBubble5
+             
+              key={countNum} count={countNum} animatedComplete={this.animatedComplete}
+             />
+             );
      }
     render() {
         return (
@@ -61,51 +100,17 @@ class EcranPulsation extends Component {
                 </TouchableOpacity>
                
                 {this.renderclaps()}
+                {this.renderclaps2()}
+                {this.renderclaps3()}
+                {this.renderclaps4()}
+                {this.renderclaps5()}
             </View>
         </View>
         );
     }
 }
-class CoeurBubble extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            yPosition: new Animated.Value(0),
-            opacity: new Animated.Value(0)
+    
 
-        };
-    }
-    componentDidMount() {
-        Animated.parallel([
-            Animated.timing(
-                this.state.yPosition, {
-                    toValue: -500,
-                    duration: 1000
-                }),
-                Animated.timing(this.state.opacity, {
-                    toValue: 1,
-                    duration: 1000
-                })
-
-        ]).start(() => {
-            setTimeout(() => {
-                    this.props.animatedComplete(this.props.count);
-            }, 100);
-        });
-    }
-    render() {
-        const animationStyle = {
-            transform: [{ translateY: this.state.yPosition }],
-            opacity: this.state.opacity
-        };
-        return (
-            <Animated.View style={[animationStyle]}>
-            <Coeur style={styles.clap} />
-            <Text style={styles.clapSMS}>je t'aime </Text>
-            </Animated.View>
-        ); 
-    }
-}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -114,12 +119,12 @@ const styles = StyleSheet.create({
     heart: {
         justifyContent: 'center', 
         alignItems: 'center',
-        top: '44%',
+        top: '40%',
         position: 'relative',
     },
     clap: {
         alignItems: 'center',
-        top: -10,
+        top: -80,
         position: 'relative',
         height: 60,
         width: 60,
@@ -129,7 +134,8 @@ const styles = StyleSheet.create({
     },
     clapSMS: {
         color: 'black',
-        fontSize: 10
+        fontSize: 10,
+        left: 20
     }
 });
 

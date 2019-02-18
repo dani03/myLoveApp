@@ -12,6 +12,7 @@ import EcranMenu from './EcranMenu';
 import EcranDeconnexion from './EcranDeconnexion';
 import StartEcran from './StartEcran';
 import EcranDate from './EcranDate';
+import HomeScreen from './HomeScreen';
 
 const CustommerdrawerComponent = (props) => (
     <Container>
@@ -47,15 +48,15 @@ const profilStack = createStackNavigator({
     profil: {
         screen: menuStackNavigator,
         navigationOptions: {
-            header: null
-           /** headerLeft: (
-                <Icon 
+            header: null,
+         /**  headerLeft: (
+               <Icon 
                     name='reorder'
                     onPress={() => this.props.navigation.navigate('openDrawer')}
                     color='#ce5e4b'
                     size={25}
                     style={{ paddingLeft: 10 }}
-                />
+               />
             ),
             headerTitle: (
             <Text style={{ left: 72, color: '#ce5e4b', fontSize: 25 }}> My Love </Text>) **/
@@ -65,7 +66,20 @@ const profilStack = createStackNavigator({
         screen: EcranDate
     }
 });
-
+const deconnect = createStackNavigator({
+    Deconnexion: { screen: EcranDeconnexion,
+    navigationOptions: { 
+        headerLeft: (
+        <Icon
+            name='reorder'
+            onPress={() => this.props.navigation.openDrawer()}
+            color='#ce5e4b'
+            size={25}
+            style={{ paddingLeft: 10 }}
+        />
+    ) }, },
+    Home: HomeScreen
+});
 const AppDrawernavigator = createDrawerNavigator({
     'mon profil': { screen: profilStack,
         navigationOptions: {
@@ -82,7 +96,17 @@ const AppDrawernavigator = createDrawerNavigator({
     'Mot D\'amour': { screen: EcranMotDamour },
     Rupture: { screen: EcranRupture },
     'A propos': { screen: Apropos },
-    Deconnexion: { screen: EcranDeconnexion },
+    Deconnexion: { screen: deconnect,
+    navigationOptions: {
+        drawerIcon: (
+            <Image 
+            source={require('../components/img/logo/DeÌconnexion.png')}
+            style={{ height: 24, width: 24 }} 
+
+            />
+        ),
+        headerTitle: 'Deconnexion'
+    } },
   }, 
   {
      initialRouteName: 'mon profil',

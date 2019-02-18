@@ -35,6 +35,7 @@ class startEcran extends Component {
                 </View>
             );
     }
+  
     render() {
         return (
             <View style={styles.container}>  
@@ -45,12 +46,6 @@ class startEcran extends Component {
                 alignItems: 'flex-end' 
           }}>
                
-                <Icon 
-                    name='reorder'
-                    onPress={() => this.props.navigation.openDrawer()}
-                    color='#ce5e4b'
-                    size={25}
-                />
                     <View style={{ left: 100 }}>
                         <Text style={{ color: '#ce5e4b', fontSize: 25 }}> My Love </Text>
                     </View>
@@ -75,7 +70,9 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         borderRadius: 3,
         top: 30, 
-         alignItems: 'center'
+        alignItems: 'center',
+        
+        
     },
     text: {
         color: '#fff',

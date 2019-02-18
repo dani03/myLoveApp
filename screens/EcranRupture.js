@@ -66,17 +66,13 @@ class Ecranrupture extends Component {
                 </View>  
             </View>
             <Modal
-                style={{ height: 30, width: 40 }} 
-               animationType={'slide'}
+                style={{ height: 30, width: 40, backgroundColor: 'gray' }} 
+               animationType="slide"
+               presentationStyle="overFullScreen"
                 onRequestClose={() => console.log('close it modal')}
                visible={this.state.displayModal}
-                animationIn={'zoomInDown'}
-                animationOut={'zoomOutUp'}
-                animationInTiming={1000}
-                animationOutTiming={1000}
-                backDropTransitionInTiming={1000}
-                backDropTransitionOutTiming={1000}
-                transparent
+                transparent={false}
+               
             >
                 <View style={styles.modal}>
                         <View>
@@ -91,6 +87,7 @@ class Ecranrupture extends Component {
                             <Button
                                 title='non'
                                 onPress={() => this.toggleModal()}
+                                onRequestClose={() => console.log('close it modal')}
                             />
                         </View>
                 </View>
@@ -142,7 +139,7 @@ const styles = StyleSheet.create({
         margin: 20,
          padding: 20,
          position: 'absolute',
-         top: '65%'
+         top: '35%'
             
     }
 });

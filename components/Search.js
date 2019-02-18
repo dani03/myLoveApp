@@ -1,63 +1,94 @@
 import React from 'react';
 import firebase from 'firebase';
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image, FlatList } from 'react-native';
+import { View, StyleSheet, TextInput,
+    Share, Text, TouchableOpacity, Image, Button } from 'react-native';
 import Spinner from './Spinner';
 
  class Search extends React.Component {
+     
     constructor(props) {
         super(props);
+        this.navigate = props.navigation;
         console.ignoredYellowBox = [
-          'Setting a timer'
+          'Setting a timer',
+          
         ];
+        this.state = {
+            searchNumber: '',
+            prenomLove: '',
+            nomLove: '',
+            numberLength: '',
+            numInconnu: '',
+            loading: false
+         };
     }
-     state = {
-        searchNumber: '',
-        prenomLove: '',
-        nomlove: '',
-        numberLength: '',
-        numInconnu: '',
-        loading: false
-     }
-     
+    
+
      showData = () => {
             this.setState({ loading: true });
+            this.setState({ numberLength: '' });
+            this.setState({ prenomLove: '' });
+            this.setState({ nomLove: '' });
             const number = this.state.searchNumber;
             if (number.length >= 12) {
+                console.log('12');
                 const rootRef = firebase.database().ref('users');
-            rootRef.orderByChild('numero').equalTo(number)
-            .once('value', snap => {
-                console.log(snap);
-                if (snap === null) {
-                   this.setState({ loading: false });
-                    this.setState({ numInconnu: 'non enregistré' });
-                } else {
-                    snap.forEach(childSnap => {
-                        const value = childSnap.val();   
-                            if (value.numero !== '') {
-                                this.setState({ loading: false });
-                                this.setState({ prenomLove: value.prenom });
-                                this.setState({ nomLove: value.nom });
-                            } 
-                    });
-                }
-                    });
+                  const refence = rootRef.orderByChild('numero');
+            if (refence !== undefined) {
+                console.log('REF');
+                refence.equalTo(number)
+                .once('value', snap => {
+                    console.log(snap);
+                        snap.forEach(childSnap => {
+                            const value = childSnap.val();   
+                                if (value.numero !== '') {
+                                    console.log('red2');
+                                    this.setState({ loading: false });
+                                    this.setState({ prenomLove: value.prenom });
+                                    this.setState({ nomLove: value.nom });
+                                } else {
+                                    this.setState({ numInconnu: 'non enregistré invité ->' });
+                                } 
+                        });
+                        });
+            } else {
+                this.setState({ numInconnu: 'non enregistré invité ->' });
+                } 
             } else {
                 this.setState({ loading: false });
-                this.setState({ numberLength: '12 chiffres sont requis' });
+                this.setState({ numberLength: '12 chiffres requis format du numero(+33)' });
             } 
        }
+       invitation = () => {
+        Share.share({
+            title: 'My Love',
+            url: 'www.youtube.com',
+            message: 'je t\'invite à être en couple avec moi sur my love telecharge la ici', 
+        }, {
+            //android
+            dialogTitle: 'inviter via',
+            //ios
+            excludedActivityTypes: ['com.apple.UIkit.activity.postToTwitter']
+        });
+        this.navigation.navigate('Dureerelation');
+    }
        renderResponse = () => {
            if (this.state.loading) {
                return <Spinner />;
            }
                return (
                 <View style={styles.user}>
-                    <Text>{this.state.prenomLove}{this.state.numberLength}</Text>
+                    <Text>{this.state.prenomLove}</Text>
+                    <Text style={{ color: 'red' }}>{this.state.numberLength}</Text>
                     <Text>{this.state.nomLove}{this.state.numInconnu}</Text>
-                    <Text>button d'invitation la</Text>
+                    <Button 
+                        title='inviter'
+                        onPress={() => this.props.navigation.navigate('dureeRelation')}
+                    />
                 </View>
                );
        }
+       
     render() {
         return (
             <View>
@@ -82,11 +113,12 @@ import Spinner from './Spinner';
                 </TouchableOpacity>
             </View>
             {this.renderResponse()}
-            
+                    
         </View>
         );
     }
  }
+ 
  const styles = StyleSheet.create({
     search: {
         marginLeft: 5,
@@ -101,7 +133,9 @@ import Spinner from './Spinner';
     user: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        marginTop: 7
+        marginTop: 7,
+        marginRight: 5,
+        marginLeft: 5
     }
  });
  export default Search;

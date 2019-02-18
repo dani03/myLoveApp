@@ -41,7 +41,7 @@ class EcranInscription extends Component {
                     .then(() => { 
                         this.setState({ isLoading: false });         
                         Alert.alert('inscription reussie');
-                        this.props.navigation.navigate('dureeRelation');
+                        this.props.navigation.navigate('start');
                     }, (error) => {
                         this.setState({ isLoading: false });
                         Alert.alert(error.message);
